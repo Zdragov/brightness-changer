@@ -84,25 +84,27 @@ with mss.mss() as sct:
 
 
 
-    pos11 = (1/3)*monitorWidth, (1/3)*monitorHeight
+    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight)))
 
-    pos21 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*1, (1/3)*monitorHeight
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight)))
 
-    pos31 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*2, (1/3)*monitorHeight
-
-
-    pos12 = (1/3)*monitorWidth, (1/3)*monitorHeight + ((1/9)*monitorHeight)*1
-
-    pos22 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*1, (1/3)*monitorHeight + ((1/9)*monitorHeight)*1
-
-    pos32 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*2, (1/3)*monitorHeight + ((1/9)*monitorHeight)*1
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight)))
 
 
-    pos13 = (1/3)*monitorWidth, (1/3)*monitorHeight + ((1/9)*monitorHeight)*2
+    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
 
-    pos23 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*1, (1/3)*monitorHeight + ((1/9)*monitorHeight)*2
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
 
-    pos33 = (1/3)*monitorWidth + ((1/9)*monitorWidth)*2, (1/3)*monitorHeight + ((1/9)*monitorHeight)*2
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
+
+
+    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
+
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
+
+    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
+
+    print(targetedPixels)
 
 
 
