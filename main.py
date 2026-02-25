@@ -1,7 +1,6 @@
 import mss as sct
 import mss.tools
 
-import wmi
 
 import pyautogui
 
@@ -25,8 +24,6 @@ time.sleep(1)
 print(pyautogui.position())
 
 mousex, mousey = pyautogui.position()
-
-print()
 
 
 with mss.mss() as sct:
@@ -72,7 +69,7 @@ with mss.mss() as sct:
                 )
             )
 
-    for i in range(8):
+    for i in range(9):
 
         target = {"top":targetedPixels[i][0], "left":targetedPixels[i][1], "width":1, "height":1}
 
@@ -92,9 +89,13 @@ with mss.mss() as sct:
 
     print(grayValueList)
 
-    totalDarknessValue = sum(grayValueList)/len(grayValueList)
+    totalDarknessValue = (sum(grayValueList)/len(grayValueList))/2.56
 
     print(totalDarknessValue)
+
+    print("Clearing targetedPixels")
+    targetedPixels = []
+
 
 
 
