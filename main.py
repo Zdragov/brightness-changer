@@ -57,44 +57,49 @@ with mss.mss() as sct:
     monitorHeight = monitor["height"]
 
 
+    while True:
 
-
-    for targetX in range(3):
-        
-        for targetY in range(3):
-            print(f"Finding height {targetY} at width {targetX}")
-            targetedPixels.append((
-                round((1/3)*monitorWidth + ((1/9)*monitorWidth)*targetX),
-                round((1/3)*monitorHeight + ((1/9)*monitorHeight)*targetY)
+        for targetX in range(3):
+            
+            for targetY in range(3):
+                print(f"Finding height {targetY} at width {targetX}")
+                targetedPixels.append((
+                    round((1/3)*monitorWidth + ((1/9)*monitorWidth)*targetX),
+                    round((1/3)*monitorHeight + ((1/9)*monitorHeight)*targetY)
+                    )
                 )
-            )
 
-    for i in range(9):
+        for i in range(9):
 
-        target = {"top":targetedPixels[i][0], "left":targetedPixels[i][1], "width":1, "height":1}
+            target = {"top":targetedPixels[i][1], "left":targetedPixels[i][0], "width":1, "height":1}
 
-        cap = sct.grab(target)
+            cap = sct.grab(target)
 
-        r, g, b = cap.pixel(0,0)
+            r, g, b = cap.pixel(0,0)
 
-        grayValue = 0.299 * r + 0.587 * g + 0.114 * b
+            grayValue = 0.299 * r + 0.587 * g + 0.114 * b
 
-        grayValueList.append(round(grayValue))
+            grayValueList.append(round(grayValue))
 
-        print(r, g, b)
+            print(r, g, b)
 
-        print(i)
+            print(i)
 
-    print(targetedPixels)
+        print(targetedPixels)
 
-    print(grayValueList)
+        print(grayValueList)
 
-    totalDarknessValue = (sum(grayValueList)/len(grayValueList))/2.56
+        totalDarknessValue = (sum(grayValueList)/len(grayValueList))/2.56
 
-    print(totalDarknessValue)
 
-    print("Clearing targetedPixels")
-    targetedPixels = []
+
+        print(f"brightness percent aimed at {totalDarknessValue}")
+
+        print("Clearing")
+        targetedPixels.clear()
+        grayValueList.clear()
+
+        time.sleep(0.5)
 
 
 
