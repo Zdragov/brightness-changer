@@ -1,3 +1,5 @@
+# This project is considered unfinished as of posting.
+
 ## Description
 
 This program checks specific pixel RGB values on your screen, and adjusts the brightness of your display accordingly. 
