@@ -15,7 +15,7 @@ targetedPixels = []
 
 grayValueList = []
 
-mainMonitor = 1
+mainMonitor = 0
 
 print(sbc.get_brightness())
 
@@ -89,7 +89,9 @@ with mss.mss() as sct:
 
         print(grayValueList)
 
-        totalDarknessValue = (sum(grayValueList)/len(grayValueList))/2.56
+        totalDarknessValue = (sum(grayValueList)/len(grayValueList))
+
+        sbc.set_brightness(totalDarknessValue, display=mainMonitor)
 
 
 
