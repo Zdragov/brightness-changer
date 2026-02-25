@@ -14,6 +14,8 @@ import screen_brightness_control as sbc
 
 targetedPixels = []
 
+grayValueList = []
+
 mainMonitor = 1
 
 print(sbc.get_brightness())
@@ -57,7 +59,68 @@ with mss.mss() as sct:
     monitorWidth = monitor["width"]
     monitorHeight = monitor["height"]
 
-    """
+
+
+
+    for targetX in range(3):
+        
+        for targetY in range(3):
+            print(f"Finding height {targetY} at width {targetX}")
+            targetedPixels.append((
+                round((1/3)*monitorWidth + ((1/9)*monitorWidth)*targetX),
+                round((1/3)*monitorHeight + ((1/9)*monitorHeight)*targetY)
+                )
+            )
+
+    for i in range(8):
+
+        target = {"top":targetedPixels[i][0], "left":targetedPixels[i][1], "width":1, "height":1}
+
+        cap = sct.grab(target)
+
+        r, g, b = cap.pixel(0,0)
+
+        grayValue = 0.299 * r + 0.587 * g + 0.114 * b
+
+        grayValueList.append(round(grayValue))
+
+        print(r, g, b)
+
+        print(i)
+
+    print(targetedPixels)
+
+    print(grayValueList)
+
+    totalDarknessValue = sum(grayValueList)/len(grayValueList)
+
+    print(totalDarknessValue)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
     
     targeted:
 
@@ -79,8 +142,10 @@ with mss.mss() as sct:
     (1/3)*monitorHeight + ((1/9)*monitorHeight)*1
     
     (1/3)*monitorHeight + ((1/9)*monitorHeight)*2
-    
-    """
+
+
+
+
 
 
 
@@ -104,19 +169,9 @@ with mss.mss() as sct:
 
     targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
 
-    print(targetedPixels)
-
-
-
-"""
-
-for i in range(3):
-    
-    for j in range(3):
-        print(f"height {j} at width {i}")
     
 
-"""
 
 
-
+    
+    """
