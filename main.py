@@ -11,19 +11,22 @@ import time
 import screen_brightness_control as sbc
 
 
+orderedGrayValueList = []
+
 targetedPixels = []
 
 grayValueList = []
 
 mainMonitor = 0
 
-print(sbc.get_brightness())
-
-time.sleep(1)
-
-print(pyautogui.position())
 
 mousex, mousey = pyautogui.position()
+
+def brightnessMethod(method):
+    if method == 1:
+        totalDarknessValue = (sum(grayValueList)/len(grayValueList))
+
+
 
 
 with mss.mss() as sct:
@@ -89,9 +92,44 @@ with mss.mss() as sct:
 
         print(grayValueList)
 
+    
+
         totalDarknessValue = (sum(grayValueList)/len(grayValueList))
 
-        sbc.set_brightness(totalDarknessValue, display=mainMonitor)
+        print(orderedGrayValueList)
+
+        
+
+        
+
+
+
+
+
+        orderedGrayValueList = sorted(grayValueList, reverse=True)
+        
+        top3count = max(1, len(orderedGrayValueList) // 3)
+
+        x = 0
+
+        for i in range(top3count):
+            
+            x = x + orderedGrayValueList[i]
+            
+        y = (x / top3count)/2
+
+        print(f"y is{y}")
+
+
+
+
+
+
+
+
+
+
+        sbc.set_brightness(50, display=mainMonitor)
 
 
 
@@ -101,7 +139,7 @@ with mss.mss() as sct:
         targetedPixels.clear()
         grayValueList.clear()
 
-        time.sleep(0.5)
+        time.sleep(999)
 
 
 
