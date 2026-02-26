@@ -145,7 +145,7 @@ with mss.mss() as sct:
 
 
 
-        sbc.set_brightness(50, display=mainMonitor)
+        sbc.set_brightness(targetDarknessValue, display=mainMonitor)
 
 
 
@@ -155,7 +155,7 @@ with mss.mss() as sct:
         targetedPixels.clear()
         grayValueList.clear()
 
-        time.sleep(999)
+        time.sleep(1)
 
 
 
@@ -182,58 +182,3 @@ with mss.mss() as sct:
 
 
 
-"""
-    
-    targeted:
-
-    1/3 to 2/3 of X
-    1/3 to 2/3 of Y
-
-    X
-
-    (1/3)*monitorWidth
-
-    (1/3)*monitorWidth + ((1/9)*monitorWidth)*1
-    
-    (1/3)*monitorWidth + ((1/9)*monitorWidth)*2
-
-
-
-    (1/3)*monitorHeight
-
-    (1/3)*monitorHeight + ((1/9)*monitorHeight)*1
-    
-    (1/3)*monitorHeight + ((1/9)*monitorHeight)*2
-
-
-
-
-
-
-
-    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight)))
-
-
-    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*1)))
-
-
-    targetedPixels.append((round((1/3)*monitorWidth), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*1), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
-
-    targetedPixels.append((round((1/3)*monitorWidth + ((1/9)*monitorWidth)*2), round((1/3)*monitorHeight + ((1/9)*monitorHeight)*2)))
-
-    
-
-
-
-    
-    """
