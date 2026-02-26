@@ -1,3 +1,5 @@
+brightnessMethodChoice = 1
+
 import mss as sct
 import mss.tools
 
@@ -19,12 +21,34 @@ grayValueList = []
 
 mainMonitor = 0
 
+targetDarknessValue = 50
+
 
 mousex, mousey = pyautogui.position()
 
 def brightnessMethod(method):
     if method == 1:
-        totalDarknessValue = (sum(grayValueList)/len(grayValueList))
+        targetDarknessValue = (sum(grayValueList)/len(grayValueList))
+        return targetDarknessValue
+    if method == 2:
+        
+        
+        top3count = max(1, len(orderedGrayValueList) // 3)
+
+        x = 0
+
+        for i in range(top3count):
+            
+            x = x + orderedGrayValueList[i]
+            
+        y = (x / top3count)/2.56
+
+        print(f"y is{y}")
+
+        return y
+    else:
+        targetDarknessValue = (sum(grayValueList)/len(grayValueList))
+        return targetDarknessValue
 
 
 
@@ -62,8 +86,7 @@ with mss.mss() as sct:
 
     while True:
 
-        for targetX in range(3):
-            
+        for targetX in range(3): #finds pixels and notes them in tuple
             for targetY in range(3):
                 print(f"Finding height {targetY} at width {targetX}")
                 targetedPixels.append((
@@ -72,7 +95,9 @@ with mss.mss() as sct:
                     )
                 )
 
-        for i in range(9):
+
+
+        for i in range(9): #rolls through each coordinate in the tuple, finding their rgb values
 
             target = {"top":targetedPixels[i][1], "left":targetedPixels[i][0], "width":1, "height":1}
 
@@ -81,44 +106,35 @@ with mss.mss() as sct:
             r, g, b = cap.pixel(0,0)
 
             grayValue = 0.299 * r + 0.587 * g + 0.114 * b
-
             grayValueList.append(round(grayValue))
-
             print(r, g, b)
-
             print(i)
 
         print(targetedPixels)
 
         print(grayValueList)
 
-    
-
-        totalDarknessValue = (sum(grayValueList)/len(grayValueList))
+        orderedGrayValueList = sorted(grayValueList, reverse=True)
 
         print(orderedGrayValueList)
 
+        targetDarknessValue = brightnessMethod(2)
+
+        print(targetDarknessValue)
+
+        
+
         
 
         
 
-
-
-
-
-        orderedGrayValueList = sorted(grayValueList, reverse=True)
         
-        top3count = max(1, len(orderedGrayValueList) // 3)
 
-        x = 0
 
-        for i in range(top3count):
-            
-            x = x + orderedGrayValueList[i]
-            
-        y = (x / top3count)/2
 
-        print(f"y is{y}")
+
+
+
 
 
 
@@ -133,7 +149,7 @@ with mss.mss() as sct:
 
 
 
-        print(f"brightness percent aimed at {totalDarknessValue}")
+        print(f"brightness percent aimed at {targetDarknessValue}")
 
         print("Clearing")
         targetedPixels.clear()
