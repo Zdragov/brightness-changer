@@ -1,4 +1,4 @@
-brightnessMethodChoice = 1
+brightnessMethodChoice = 2
 
 import mss as sct
 import mss.tools
@@ -30,7 +30,7 @@ def brightnessMethod(method):
     if method == 1:
         targetDarknessValue = (sum(grayValueList)/len(grayValueList))
         return targetDarknessValue
-    if method == 2:
+    elif method == 2:
         
         
         top3count = max(1, len(orderedGrayValueList) // 3)
@@ -46,6 +46,8 @@ def brightnessMethod(method):
         print(f"y is{y}")
 
         return y
+    
+
     else:
         targetDarknessValue = (sum(grayValueList)/len(grayValueList))
         return targetDarknessValue
@@ -107,53 +109,31 @@ with mss.mss() as sct:
 
             grayValue = 0.299 * r + 0.587 * g + 0.114 * b
             grayValueList.append(round(grayValue))
-            print(r, g, b)
-            print(i)
-
-        print(targetedPixels)
-
-        print(grayValueList)
 
         orderedGrayValueList = sorted(grayValueList, reverse=True)
 
         print(orderedGrayValueList)
 
-        targetDarknessValue = brightnessMethod(2)
 
-        print(targetDarknessValue)
+
+
+
+        targetDarknessValue = brightnessMethod(1)
+        targetDarknessValue = max(1, targetDarknessValue)
+        targetDarknessValue = min(99, targetDarknessValue)
+
 
         
 
-        
-
-        
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
         sbc.set_brightness(targetDarknessValue, display=mainMonitor)
-
-
 
         print(f"brightness percent aimed at {targetDarknessValue}")
 
         print("Clearing")
         targetedPixels.clear()
         grayValueList.clear()
+        orderedGrayValueList.clear()
 
         time.sleep(1)
 
