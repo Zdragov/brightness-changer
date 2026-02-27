@@ -24,8 +24,11 @@ mainMonitor = 0
 targetDarknessValue = 50
 
 def brightnessMethod(method):
+
+    # gray value SHOULD be a value from zero to one
+
     if method == 1:
-        targetDarknessValue = (sum(grayValueList)/len(grayValueList))
+        targetDarknessValue = (sum(grayValueList)/len(grayValueList))*100
         return targetDarknessValue
     elif method == 2:
         
@@ -38,7 +41,7 @@ def brightnessMethod(method):
             
             combinedBrightness = combinedBrightness + orderedGrayValueList[i]
             
-        brightnessOutput = (combinedBrightness / topThird)/2.56
+        brightnessOutput = (combinedBrightness / topThird)*100
 
         print(f"y is{brightnessOutput}")
 
@@ -113,9 +116,6 @@ with mss.mss() as sct:
 
 
         print(orderedGrayValueList)
-
-
-
 
 
         targetDarknessValue = brightnessMethod(1)
