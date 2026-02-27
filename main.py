@@ -23,9 +23,6 @@ mainMonitor = 0
 
 targetDarknessValue = 50
 
-
-mousex, mousey = pyautogui.position()
-
 def brightnessMethod(method):
     if method == 1:
         targetDarknessValue = (sum(grayValueList)/len(grayValueList))
@@ -33,19 +30,19 @@ def brightnessMethod(method):
     elif method == 2:
         
         
-        top3count = max(1, len(orderedGrayValueList) // 3)
+        topThird = max(1, len(orderedGrayValueList) // 3)
 
-        x = 0
+        combinedBrightness = 0
 
-        for i in range(top3count):
+        for i in range(topThird):
             
-            x = x + orderedGrayValueList[i]
+            combinedBrightness = combinedBrightness + orderedGrayValueList[i]
             
-        y = (x / top3count)/2.56
+        brightnessOutput = (combinedBrightness / topThird)/2.56
 
-        print(f"y is{y}")
+        print(f"y is{brightnessOutput}")
 
-        return y
+        return brightnessOutput
     
 
     else:
@@ -63,23 +60,23 @@ with mss.mss() as sct:
 
     print(f"Selector monitor dimensions: {monitorWidth}x{monitorHeight}")
     
-    capture = {"top":mousey, "left":mousex, "width":1, "height":1}
+    #capture = {"top":mousey, "left":mousex, "width":1, "height":1}
 
-    x = sct.grab(capture)
+    #x = sct.grab(capture)
 
-    r, g, b = x.pixel(0,0)
+    #r, g, b = x.pixel(0,0)
 
-    print(r, g, b)
+    #print(r, g, b)
     
-    grayValue = 0.299 * r + 0.587 * g + 0.114 * b
+    #grayValue = 0.299 * r + 0.587 * g + 0.114 * b
 
-    print(grayValue)
+    #print(grayValue)
 
-    targetBrightness = grayValue / 2.56
+    #targetBrightness = grayValue / 2.56
 
-    print(targetBrightness)
+    #print(targetBrightness)
 
-    sbc.set_brightness(50, display=mainMonitor)
+    #sbc.set_brightness(50, display=mainMonitor)
     
     monitor = sct.monitors[mainMonitor]
     monitorWidth = monitor["width"]
@@ -107,10 +104,13 @@ with mss.mss() as sct:
 
             r, g, b = cap.pixel(0,0)
 
-            grayValue = 0.299 * r + 0.587 * g + 0.114 * b
+            grayValue = 0.299 * (r/256) + 0.587 * (g/256) + 0.114 * (b/256)
             grayValueList.append(round(grayValue))
 
-        orderedGrayValueList = sorted(grayValueList, reverse=True)
+
+
+        orderedGrayValueList = sorted(grayValueList, reverse=True) #sorts all the numbers from highest to lowest
+
 
         print(orderedGrayValueList)
 
@@ -119,6 +119,8 @@ with mss.mss() as sct:
 
 
         targetDarknessValue = brightnessMethod(1)
+
+
         targetDarknessValue = max(1, targetDarknessValue)
         targetDarknessValue = min(99, targetDarknessValue)
 
