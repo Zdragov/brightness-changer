@@ -12,6 +12,10 @@ import time
 
 import screen_brightness_control as sbc
 
+brightnessMin = 0
+
+brightnessMax = 100
+
 
 orderedGrayValueList = []
 
@@ -63,24 +67,6 @@ with mss.mss() as sct:
 
     print(f"Selector monitor dimensions: {monitorWidth}x{monitorHeight}")
     
-    #capture = {"top":mousey, "left":mousex, "width":1, "height":1}
-
-    #x = sct.grab(capture)
-
-    #r, g, b = x.pixel(0,0)
-
-    #print(r, g, b)
-    
-    #grayValue = 0.299 * r + 0.587 * g + 0.114 * b
-
-    #print(grayValue)
-
-    #targetBrightness = grayValue / 2.56
-
-    #print(targetBrightness)
-
-    #sbc.set_brightness(50, display=mainMonitor)
-    
     monitor = sct.monitors[mainMonitor]
     monitorWidth = monitor["width"]
     monitorHeight = monitor["height"]
@@ -108,7 +94,7 @@ with mss.mss() as sct:
             r, g, b = cap.pixel(0,0)
 
             grayValue = 0.299 * (r/256) + 0.587 * (g/256) + 0.114 * (b/256)
-            grayValueList.append(round(grayValue))
+            grayValueList.append(grayValue)
 
 
 
@@ -119,6 +105,8 @@ with mss.mss() as sct:
 
 
         targetDarknessValue = brightnessMethod(1)
+
+        targetDarknessValue = (((brightnessMax - brightnessMin)/100)*targetDarknessValue)+brightnessMin
 
 
         targetDarknessValue = max(1, targetDarknessValue)
