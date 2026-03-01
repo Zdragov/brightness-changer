@@ -3,6 +3,14 @@ mainMonitor = 1 #Display count begins at 1, so 1 is the first display.
 
 brightnessMethodChoice = 2 
 
+"""
+
+Brightness method 1 averages the brightness from all detected pixels.
+
+Brightness method 2 averages the brightness from only the top 3 whitest pixels. 
+
+"""
+
 brightnessMin = 0 #The minimum percentage this program can change your brightness to
 
 brightnessMax = 100 #The maximum percentage this program can change your brightness to
