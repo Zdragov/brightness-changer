@@ -121,9 +121,6 @@ with mss.mss() as sct:
         targetDarknessValue = max(1, targetDarknessValue)
         targetDarknessValue = min(99, targetDarknessValue)
 
-
-        
-
     
         sbc.set_brightness(targetDarknessValue, display=mainMonitorSBC)
 
@@ -141,30 +138,3 @@ with mss.mss() as sct:
 
 
 
-
-
-
-
-"""
-on a 1440p, dimensions are 2560 x 1440
-
-values found in the center 1/3 of the screen
-
-X at:
-
-853.33_ 
-
-1137.77_
-
-1422.22_
-
-1706.66_
-
-
-
-
-SBC uses screen zero as first screen, but MSS uses screen zero as all screens
-
-uh
-
-"""
