@@ -1,4 +1,4 @@
-# This project is considered unfinished as of posting.
+# This project is currently considered unfinished, but in a usable state. 
 
 ## Description
 
@@ -13,6 +13,6 @@ This program checks specific pixel RGB values on your screen, and adjusts the br
 ### To-do
 
 - [x] Found packages
-- [ ] Automatically adjust brightness
-- [ ] Brightness settings 
+- [x] Automatically adjust brightness
+- [x] Brightness settings (lower and higher limits)
 - [ ] Customizable pixel selection
