@@ -1,29 +1,29 @@
-brightnessMethodChoice = 2
+
+mainMonitor = 1 #Display count begins at 1, so 1 is the first display.
+
+brightnessMethodChoice = 2 
+
+brightnessMin = 0 #The minimum percentage this program can change your brightness to
+
+brightnessMax = 100 #The maximum percentage this program can change your brightness to
+
+updateDelay = 1 #Times the program updates the brightness, in seconds
+
+
+
+
+
 
 import mss as sct
 import mss.tools
-
-
-import pyautogui
-
 import time
-
-
-
 import screen_brightness_control as sbc
-
-brightnessMin = 0
-
-brightnessMax = 100
-
 
 orderedGrayValueList = []
 
 targetedPixels = []
 
 grayValueList = []
-
-mainMonitor = 1
 
 mainMonitorSBC = mainMonitor - 1
 
@@ -40,22 +40,16 @@ def brightnessMethod(method):
         return targetDarknessValue
     elif method == 2:
         
-        
         topThird = max(1, len(orderedGrayValueList) // 3)
-
         combinedBrightness = 0
 
         for i in range(topThird):
-            
             combinedBrightness = combinedBrightness + orderedGrayValueList[i]
             
         brightnessOutput = (combinedBrightness / topThird)*100
-
         print(f"y is{brightnessOutput}")
-
         return brightnessOutput
     
-
     else:
         targetDarknessValue = (sum(grayValueList)/len(grayValueList))
         return targetDarknessValue
@@ -131,10 +125,4 @@ with mss.mss() as sct:
         grayValueList.clear()
         orderedGrayValueList.clear()
 
-        time.sleep(1)
-
-
-
-
-
-
+        time.sleep(updateDelay)
