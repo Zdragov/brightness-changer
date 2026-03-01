@@ -23,7 +23,11 @@ targetedPixels = []
 
 grayValueList = []
 
-mainMonitor = 0
+mainMonitor = 1
+
+mainMonitorSBC = mainMonitor - 1
+
+#SBC uses screen zero as first screen, but MSS uses screen one as first screen. MSS screen zero is all screens combined
 
 targetDarknessValue = 50
 
@@ -77,6 +81,9 @@ with mss.mss() as sct:
         for targetX in range(3): #finds pixels and notes them in tuple
             for targetY in range(3):
                 print(f"Finding height {targetY} at width {targetX}")
+
+                print("TARGETING AT")
+                print(round((1/3)*monitorWidth + ((1/9)*monitorWidth)*targetX))
                 targetedPixels.append((
                     round((1/3)*monitorWidth + ((1/9)*monitorWidth)*targetX),
                     round((1/3)*monitorHeight + ((1/9)*monitorHeight)*targetY)
@@ -88,6 +95,8 @@ with mss.mss() as sct:
         for i in range(9): #rolls through each coordinate in the tuple, finding their rgb values
 
             target = {"top":targetedPixels[i][1], "left":targetedPixels[i][0], "width":1, "height":1}
+
+            print(targetedPixels)
 
             cap = sct.grab(target)
 
@@ -116,7 +125,7 @@ with mss.mss() as sct:
         
 
     
-        sbc.set_brightness(targetDarknessValue, display=mainMonitor)
+        sbc.set_brightness(targetDarknessValue, display=mainMonitorSBC)
 
         print(f"brightness percent aimed at {targetDarknessValue}")
 
@@ -136,19 +145,26 @@ with mss.mss() as sct:
 
 
 
+"""
+on a 1440p, dimensions are 2560 x 1440
+
+values found in the center 1/3 of the screen
+
+X at:
+
+853.33_ 
+
+1137.77_
+
+1422.22_
+
+1706.66_
 
 
 
 
+SBC uses screen zero as first screen, but MSS uses screen zero as all screens
 
+uh
 
-
-
-
-
-
-
-
-
-
-
+"""
